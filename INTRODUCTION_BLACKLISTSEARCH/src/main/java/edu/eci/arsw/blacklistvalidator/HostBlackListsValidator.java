@@ -5,9 +5,7 @@
  */
 package edu.eci.arsw.blacklistvalidator;
 
-import com.sun.xml.internal.messaging.saaj.util.TeeInputStream;
 import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,14 +46,23 @@ public class HostBlackListsValidator {
         
         for (int j = 0; j < N; j++){
             ThreadClass temp;
-            if (sec%2 != 0 && N < (j*sec)+sec){
-                temp = new ThreadClass(Integer.toString(j),(j*sec),N-1,ipaddress,blackListOcurrences);
+            if (sec%2 != 0 && j+1 == N){
+                temp = new ThreadClass(Integer.toString(j),(j*sec)+1,l,ipaddress,blackListOcurrences);
             }
             else{
-                temp = new ThreadClass(Integer.toString(j),(j*sec),(j*sec)+sec,ipaddress,blackListOcurrences);
+                temp = new ThreadClass(Integer.toString(j),(j*sec)+1,(j*sec)+sec,ipaddress,blackListOcurrences);
             }            
-            temp.run();
-            threats.add(temp);            
+            temp.start();
+            threats.add(temp);
+        }
+        
+        for (ThreadClass threat : threats) {
+            try {
+                threat.join();
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+            
         }
         ocurrencesCount = ThreadClass.getBlack().get();
         checkedListsCount = ThreadClass.getCheck().get();
@@ -76,7 +83,7 @@ public class HostBlackListsValidator {
         }
         else{
             skds.reportAsTrustworthy(ipaddress);
-        }                
+        }
         
         LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
         

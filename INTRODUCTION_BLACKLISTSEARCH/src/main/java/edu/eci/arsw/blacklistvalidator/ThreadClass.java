@@ -36,19 +36,37 @@ public class ThreadClass implements Runnable{
 
     @Override
     public void run() {
-        
-        for (int i = start; start < end; i++){
+        //System.out.println("start run " + name);
+        for (int i = start; i < end+1; i++){            
             checkedCount.addAndGet(1);
+            System.out.println("name = " + name + " I: "+ i);
             if (skds.isInBlackListServer(i, ip)){
                 blackListOcurrences.add(i);
                 blackCount.addAndGet(1);
+                //System.out.println("server: " + i);
             }
         }
-        
+        //System.out.println("list " + name + " " + blackListOcurrences.toString());
+        //System.out.println("black list " + blackCount);
+        //System.out.println("end run " + name);
     }
     
     public void start(){
         this.thread.start();
+        //System.out.println("Start " + name);
+        //System.out.println("rango del " + name + " de: " + start + " a " + end);
+    }
+    
+    public final synchronized void join() throws InterruptedException{
+        thread.join();
+    }            
+    
+    public final synchronized void join(long l) throws InterruptedException{
+        thread.join(l);
+    }
+    
+    public final synchronized void join(long l, int i) throws InterruptedException{
+        thread.join(l,i);
     }
     
     public int ask(){        
