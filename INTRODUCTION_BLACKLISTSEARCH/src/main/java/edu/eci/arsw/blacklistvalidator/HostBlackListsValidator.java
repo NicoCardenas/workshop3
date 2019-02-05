@@ -29,7 +29,7 @@ public class HostBlackListsValidator {
      * @param ipaddress suspicious host's IP address.
      * @return  Blacklists numbers where the given host's IP address was found.
      */
-    public List<Integer> checkHost(String ipaddress){
+    public List<Integer> checkHost(String ipaddress, int N){
         
         LinkedList<Integer> blackListOcurrences=new LinkedList<>();
         
@@ -39,7 +39,14 @@ public class HostBlackListsValidator {
         
         int checkedListsCount=0;
         
-        for (int i=0;i<skds.getRegisteredServersCount() && ocurrencesCount<BLACK_LIST_ALARM_COUNT;i++){
+        List<ThreadClass> threats = new LinkedList<>();
+        
+        for (int j = 0; j < N; j++){
+            ThreadClass temp = new ThreadClass(Integer.toString(j),0,0);
+            threats.add(temp);
+        }
+        
+        for (int i=0; i < skds.getRegisteredServersCount() && ocurrencesCount < BLACK_LIST_ALARM_COUNT; i++){
             checkedListsCount++;
             
             if (skds.isInBlackListServer(i, ipaddress)){
