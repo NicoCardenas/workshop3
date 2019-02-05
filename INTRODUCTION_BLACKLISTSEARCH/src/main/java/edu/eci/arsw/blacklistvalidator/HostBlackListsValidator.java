@@ -5,7 +5,9 @@
  */
 package edu.eci.arsw.blacklistvalidator;
 
+import com.sun.xml.internal.messaging.saaj.util.TeeInputStream;
 import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,11 +43,23 @@ public class HostBlackListsValidator {
         
         List<ThreadClass> threats = new LinkedList<>();
         
-        for (int j = 0; j < N; j++){
-            ThreadClass temp = new ThreadClass(Integer.toString(j),0,0);
-            threats.add(temp);
-        }
+        int l = skds.getRegisteredServersCount();
+        int sec = l/N;      
         
+        for (int j = 0; j < N; j++){
+            ThreadClass temp;
+            if (sec%2 != 0 && N < (j*sec)+sec){
+                temp = new ThreadClass(Integer.toString(j),(j*sec),N-1,ipaddress,blackListOcurrences);
+            }
+            else{
+                temp = new ThreadClass(Integer.toString(j),(j*sec),(j*sec)+sec,ipaddress,blackListOcurrences);
+            }            
+            temp.run();
+            threats.add(temp);            
+        }
+        ocurrencesCount = ThreadClass.getBlack().get();
+        checkedListsCount = ThreadClass.getCheck().get();
+        /*
         for (int i=0; i < skds.getRegisteredServersCount() && ocurrencesCount < BLACK_LIST_ALARM_COUNT; i++){
             checkedListsCount++;
             
@@ -55,7 +69,7 @@ public class HostBlackListsValidator {
                 
                 ocurrencesCount++;
             }
-        }
+        }*/
         
         if (ocurrencesCount>=BLACK_LIST_ALARM_COUNT){
             skds.reportAsNotTrustworthy(ipaddress);
