@@ -1,6 +1,7 @@
 
 # workshop3
 
+# Black List Search
 ## Part I - Introduction to threads in JAVA
 
 [File of Start()](INTRODUCTION_BLACKLISTSEARCH/outputStart.txt)
@@ -18,11 +19,11 @@
 > **Answer**: the conflict is that we have to ensure the integrity of the value in the variable. This is to guarantee that the value never is incorrect.
 
 ## Part IV - Performance Evaluation
-![jVisualVM of a single thread](image/singleThead.png)
-![jVisualVM of 4 threads](image/4Thead.png)
-![jVisualVM of 8 threads](image/8Thead.png)
-![jVisualVM of 50 threads](image/50Thead.png)
-![jVisualVM of 100 threads](image/100Thead.png)
+![jVisualVM of a single thread](image/singleThread.png)
+![jVisualVM of 4 threads](image/4Thread.png)
+![jVisualVM of 8 threads](image/8Thread.png)
+![jVisualVM of 50 threads](image/50Thread.png)
+![jVisualVM of 100 threads](image/100Thread.png)
 ![Graph of threads](image/graph.png)
 
 ### Questions
@@ -46,3 +47,19 @@ $$
 
 > would it be improved?
 > **Answer**: it improved in a relative way.
+
+# Snake Race
+
+## Part 1
+
+Control threads using wait/notify.
+Result: [Output File](primefinder/output.txt)
+
+## Part 2
+Image of the game.
+![Image of the game](image/snakeGame.png)
+
+## Part 3
+
+2. [Answer File](SNAKE_RACE/ANSWER.txt) 
+3. Critical regions: The methods of each snakes that answer when a snake is about to hit another object. **Solucion**: synchronize the methods.
