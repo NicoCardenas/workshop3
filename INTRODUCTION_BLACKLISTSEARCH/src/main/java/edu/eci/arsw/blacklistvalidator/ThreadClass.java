@@ -39,7 +39,7 @@ public class ThreadClass implements Runnable{
         //System.out.println("start run " + name);
         for (int i = start; i < end+1; i++){            
             checkedCount.addAndGet(1);
-            System.out.println("name = " + name + " I: "+ i);
+            //System.out.println("name = " + name + " I: "+ i);
             if (skds.isInBlackListServer(i, ip)){
                 blackListOcurrences.add(i);
                 blackCount.addAndGet(1);

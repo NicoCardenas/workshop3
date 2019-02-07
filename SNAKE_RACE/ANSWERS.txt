@@ -1,0 +1,11 @@
+Race Conditions
+:
+  if two snakes arrive at the same time to an consumable item
+
+Concurrent handling
+:
+  The class Snake have a property that use LinkedList that doesn't guarantees a concurrent use.
+
+  Solution: change LinkedList to ConcurrentLinkedQueue.
+Unnecessary use of active waits:
+  In the class SnakeApp have a active wait that i think is unnecessary, in the init method. 
