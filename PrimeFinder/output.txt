@@ -1,0 +1,19 @@
+cd D:\NickZennin\Documents\GitHub\workshop3\primefinder; "JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_181" cmd /c "\"\"C:\\Program Files\\NetBeans 8.2\\java\\maven\\bin\\mvn.bat\" -Dexec.args=\"-classpath %classpath edu.eci.arsw.primefinder.Main\" -Dexec.executable=\"C:\\Program Files\\Java\\jdk1.8.0_181\\bin\\java.exe\" -Dmaven.ext.class.path=\"C:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar\" -Dfile.encoding=UTF-8 org.codehaus.mojo:exec-maven-plugin:1.2.1:exec\""
+Running NetBeans Compile On Save execution. Phase execution is skipped and output directories of dependency projects (with Compile on Save turned on) will be used instead of their jar artifacts.
+Scanning for projects...
+                                                                        
+------------------------------------------------------------------------
+Building PrimeFinder 1.0-SNAPSHOT
+------------------------------------------------------------------------
+
+--- exec-maven-plugin:1.2.1:exec (default-cli) @ PrimeFinder ---
+Total size: 231052
+Press Enter to finish
+
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 20.405s
+Finished at: Wed Feb 06 22:38:43 COT 2019
+Final Memory: 7M/169M
+------------------------------------------------------------------------
